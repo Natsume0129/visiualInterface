@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>REPORT.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="visual-interface-report">VISUAL INTERFACE REPORT</h1>
+<h2 id="objective-and-task-description">Objective and Task Description</h2>
+<p>The objective of this task is to extract perceptually important boundaries from grayscale images based on intensity variations. Here, “important boundaries” do not simply refer to locations with strong local intensity changes, but rather to structural edges that effectively describe object contours and global shape as perceived by human vision.</p>
+<p>As a first step, the original image is carefully inspected and a hand-drawn sketch of the main contours is created. This sketch represents the boundaries that are considered important from a human perceptual perspective and serves as a ground-truth reference for later comparison and evaluation of algorithmic results.</p>
+<p>Based on this reference, a signal-processing-based edge extraction method is designed and implemented. The grayscale image is treated as a two-dimensional signal and analyzed by applying one-dimensional wavelet transforms independently along the x and y directions. This multi-scale analysis enables the extraction of intensity change responses at different spatial scales, from which candidate edge points are obtained by integrating responses across scales.</p>
+<p>Furthermore, to suppress fine texture details and noise that do not correspond to meaningful object boundaries, a cross-scale consistency constraint is introduced. Only edge points that exhibit significant responses across multiple scales are retained, with the aim of improving correspondence to the manually drawn contours.</p>
+<p>Finally, the extracted edge maps are quantitatively evaluated by comparison with the hand-drawn reference using pixel-level evaluation metrics. Through this analysis, the effects of multi-scale processing and cross-scale consistency on boundary extraction performance are examined and discussed.</p>
+<h2 id="attachments-and-source-code">Attachments and Source code</h2>
+<p>If you need to see my code and the raw output, you can check my GitHub repository or the project archive.</p>
+<p>Github repository:
+https://github.com/Natsume0129/visualInterface</p>
+<h2 id="overview">Overview</h2>
+<p>The experiments in this study are divided into two main parts, each accompanied by corresponding parameter tuning and optimization.</p>
+<p>In the first part, an image of my own cat is selected as the test subject. Despite extensive parameter tuning and multiple attempts with different configurations, the final edge extraction results are not considered satisfactory. Due to the rich fur texture of the cat image, many detected edges correspond to fine texture details rather than the intended object contours, making it difficult to achieve good agreement with the manually drawn sketch.</p>
+<p>Therefore, in the second part of the experiments, the well-known Lena image, which is widely used in the computer vision community, is chosen as the input image. Based on the experience gained from the first part, two different styles of hand-drawn sketches are created for the Lena image, reflecting different interpretations of perceptually important boundaries.</p>
+<p>Furthermore, instead of manually adjusting parameters, a parameter enumeration strategy is adopted. Various combinations of parameters are systematically evaluated, and the best-performing configuration is selected based on quantitative metrics. As a result, an F1 score exceeding 0.7 is achieved, which is considered a reasonably good performance for this task.</p>
+<h2 id="algorithm-description">Algorithm Description</h2>
+<p>This section describes the wavelet-based edge detection pipeline implemented in this work. The algorithm consists of two independently evaluated edge extraction strategies: a baseline multi-scale fusion method and a cross-scale consistency-based method.</p>
+<hr>
+<h4 id="block-1--inputs-and-parameters">Block 1 — Inputs and Parameters</h4>
+<ul>
+<li>Input grayscale image: $I \in [0,255]^{H \times W}$</li>
+<li>Hand-drawn sketch image (used to build ground truth): $S \in [0,255]^{H \times W}$</li>
+</ul>
+<p>Key parameters:</p>
+<ul>
+<li>Wavelet type: <code>haar</code></li>
+<li>Number of wavelet scales: <code>LEVELS = L</code></li>
+<li>Morphological opening kernel size: <code>MORPH_OPEN_K</code></li>
+<li>Consistency parameters: <code>(CONSISTENCY_K, CONSISTENCY_Q)</code></li>
+<li>Evaluation tolerance (pixels): <code>TOLERANCE_PX</code></li>
+</ul>
+<pre class="hljs"><code><div>Input:
+  I : grayscale image
+  S : sketch image
+
+Output:
+  P_base : baseline edge map
+  P_cons : consistency-based edge map
+  Precision / Recall / F1 scores
+</div></code></pre>
+<hr>
+<h4 id="block-2--ground-truth-construction-from-sketch">Block 2 — Ground Truth Construction from Sketch</h4>
+<p>The hand-drawn sketch is converted into a binary ground-truth edge map ( G ).</p>
+<p>Steps:</p>
+<ol>
+<li>Resize sketch to match the input image resolution (nearest neighbor).</li>
+<li>Apply Gaussian blur for threshold stability.</li>
+<li>Perform Otsu binarization.</li>
+<li>Automatically invert the binary image if the background is detected as white.</li>
+<li>Apply optional morphological opening to remove small artifacts.</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">make_gt_from_sketch</span><span class="hljs-params">(sketch, target_shape)</span>:</span>
+    sketch = resize_nearest(sketch, target_shape)
+    blur = gaussian_blur(sketch, k=<span class="hljs-number">5</span>)
+    bw = otsu_threshold(blur)
+
+    <span class="hljs-keyword">if</span> white_ratio(bw) &gt; <span class="hljs-number">0.5</span>:
+        bw = invert(bw)
+
+    bw = morph_open(bw, k=MORPH_OPEN_K)
+    <span class="hljs-keyword">return</span> bw  <span class="hljs-comment"># binary GT mask</span>
+</div></code></pre>
+<hr>
+<h4 id="block-3--multi-scale-wavelet-responses-in-x-and-y-directions">Block 3 — Multi-scale Wavelet Responses in X and Y Directions</h4>
+<p>The grayscale image is treated as a collection of one-dimensional signals.</p>
+<ul>
+<li>Each <strong>row</strong> is processed to obtain horizontal responses.</li>
+<li>Each <strong>column</strong> is processed to obtain vertical responses.</li>
+</ul>
+<p>For each 1D signal:</p>
+<ul>
+<li>Stationary Wavelet Transform (SWT) is applied.</li>
+<li>Absolute values of detail coefficients are used as edge responses.</li>
+<li>Padding is applied if necessary to satisfy SWT length requirements.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">swt_detail_abs_1d</span><span class="hljs-params">(signal, wavelet, L)</span>:</span>
+    signal_pad = pad_to_multiple_of_2powL(signal, L)
+    coeffs = pywt.swt(signal_pad, wavelet, level=L)
+
+    details = []
+    <span class="hljs-keyword">for</span> (cA, cD) <span class="hljs-keyword">in</span> coeffs:
+        details.append(abs(cD))
+    <span class="hljs-keyword">return</span> details
+</div></code></pre>
+<p>The resulting responses are stored as:</p>
+<ul>
+<li>$E_x^{(l)} \in \mathbb{R}^{H \times W}$</li>
+<li>$E_y^{(l)} \in \mathbb{R}^{H \times W}$</li>
+</ul>
+<h2 id="for-each-scale-l--1-dots-l">for each scale $l = 1, \dots, L$.</h2>
+<h4 id="block-4--baseline-multi-scale-fusion">Block 4 — Baseline Multi-scale Fusion</h4>
+<p>In the baseline method, responses from all scales are aggregated before thresholding.</p>
+<ol>
+<li>
+<p>For each scale, responses are weighted such that coarser scales receive larger weights:</p>
+<p>$$
+w_l \propto 2^l
+$$</p>
+</li>
+<li>
+<p>Weighted responses are summed across scales separately for $x$ and $y$ directions.</p>
+</li>
+<li>
+<p>The final edge energy map is computed using L2 fusion:</p>
+<p>$$
+E = \sqrt{E_x^2 + E_y^2}
+$$</p>
+</li>
+</ol>
+<pre class="hljs"><code><div>Ex = sum(w[l] * Ex_levels[l] <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> range(L))
+Ey = sum(w[l] * Ey_levels[l] <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> range(L))
+E  = sqrt(Ex*Ex + Ey*Ey)
+</div></code></pre>
+<p>The energy map is normalized to [0,255] and binarized using Otsu thresholding (or a manual threshold if specified), followed by optional morphological opening.</p>
+<pre class="hljs"><code><div>P_base = binarize_edge_map(normalize(E))
+</div></code></pre>
+<hr>
+<h4 id="block-5--cross-scale-consistency-based-edge-extraction">Block 5 — Cross-scale Consistency-based Edge Extraction</h4>
+<p>The consistency-based method enforces stability across multiple wavelet scales.</p>
+<p>For each scale ( l ):</p>
+<ol>
+<li>
+<p>Combine x- and y-direction responses using a maximum operation:</p>
+<p>$$
+S^{(l)} = \max\left(E_x^{(l)}, E_y^{(l)}\right)
+$$</p>
+</li>
+<li>
+<p>Determine a scale-specific threshold using a quantile ($Q$).</p>
+</li>
+<li>
+<p>Mark pixels whose response exceeds this threshold.</p>
+</li>
+</ol>
+<p>A pixel is retained in the final consistency mask if it is marked significant in at least <code>CONSISTENCY_K</code> scales.</p>
+<pre class="hljs"><code><div>count = <span class="hljs-number">0</span>
+<span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> range(L):
+    S = max(Ex_levels[l], Ey_levels[l])
+    thr = quantile(S, CONSISTENCY_Q)
+    count += (S &gt;= thr)
+
+P_cons = (count &gt;= CONSISTENCY_K)
+</div></code></pre>
+<p>The resulting binary mask ( P_{\text{cons}} ) represents edges that are stable across scales.</p>
+<hr>
+<h4 id="block-6--independent-evaluation-of-baseline-and-consistency-methods">Block 6 — Independent Evaluation of Baseline and Consistency Methods</h4>
+<p>The baseline edge map ($P_{\text{base}}$) and the consistency-based edge map ($P_{\text{cons}}$) are evaluated <strong>independently</strong>.</p>
+<p>To allow small spatial misalignment between detected edges and the ground truth, the ground-truth mask is dilated by <code>TOLERANCE_PX</code> pixels before computing true positives.</p>
+<pre class="hljs"><code><div>G_tol = dilate(G, radius=TOLERANCE_PX)
+
+TP = sum(P &amp; G_tol)
+FP = sum(P &amp; ~G_tol)
+FN = sum(~P &amp; G)
+</div></code></pre>
+<p>Precision, Recall, and F1-score are then computed for each method.</p>
+<hr>
+<h4 id="block-7--visualization-via-overlay-images">Block 7 — Visualization via Overlay Images</h4>
+<p>For qualitative analysis, overlay images are generated:</p>
+<ul>
+<li>Green: ground-truth edges</li>
+<li>Red: predicted edges</li>
+<li>Yellow: overlapping pixels (correct detections)</li>
+</ul>
+<pre class="hljs"><code><div>overlay[GT] = green
+overlay[PRED] = red
+overlay[GT &amp; PRED] = yellow
+</div></code></pre>
+<p>These visualizations help interpret the quantitative evaluation results.</p>
+<hr>
+<h4 id="summary">Summary</h4>
+<p>This algorithm implements and compares two wavelet-based edge detection strategies:</p>
+<ul>
+<li><strong>Baseline method</strong>: emphasizes edge strength via multi-scale energy fusion.</li>
+<li><strong>Consistency-based method</strong>: emphasizes structural stability across scales.</li>
+</ul>
+<p>Both methods are evaluated separately to analyze the trade-off between edge completeness and robustness to texture and noise.</p>
+<h2 id="specific-experiments-and-results-and-optimization">Specific experiments and results, and optimization.</h2>
+<h3 id="part-1-cat-experiment">Part 1 CAT EXPERIMENT</h3>
+<h4 id="input">Input</h4>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="cat_experiment/picture/origin.jpg" style="width: 32%;" />
+    <img src="cat_experiment/picture/origin_gray.jpg" style="width: 32%;" />
+    <img src="cat_experiment/picture/origin_manuscript.jpg" style="width: 32%;" />
+  </div>
+  <figcaption>
+    Comparison: Origin picture, Grayscale picture, Sketch
+  </figcaption>
+</figure>
+<h4 id="ground-truth">Ground truth</h4>
+<p>(a) Input grayscale image
+(b) Hand-drawn sketch converted to a binary ground-truth edge map</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="cat_experiment/plots/gt_bin.png" style="width: 50%;" />
+  </div>
+  <figcaption>
+    Image of Ground truth
+  </figcaption>
+</figure>
+<h4 id="multi-scale-wavelet-responses">Multi-scale Wavelet Responses</h4>
+<p>The figure shows the wavelet detail responses along the x-direction at different scales. Each row of the image is treated as a one-dimensional signal and analyzed using the stationary wavelet transform. The absolute values of the detail coefficients are used to represent the magnitude of intensity changes at each scale.</p>
+<p>At finer scales, the responses mainly highlight high-frequency components such as textures, noise, and fine details. These responses tend to be spatially dense and include many variations that do not correspond to perceptually important object boundaries. As the scale becomes coarser, the responses become more concentrated around major structural contours, while fine textures are progressively suppressed.</p>
+<p>This multi-scale behavior illustrates that perceptually meaningful boundaries are more stable across coarser scales, whereas texture-induced edges tend to appear predominantly at finer scales. Such observations motivate the use of multi-scale fusion and cross-scale consistency constraints in the subsequent edge extraction process.</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="cat_experiment/plots/Ex_scale_1.png" style="width: 40%;" />
+    <img src="cat_experiment/plots/Ex_scale_2.png" style="width: 40%;" />
+  </div>
+    <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="cat_experiment/plots/Ex_scale_1.png" style="width: 40%;" />
+    <img src="cat_experiment/plots/Ex_scale_2.png" style="width: 40%;" />
+  </div>
+  <figcaption>
+    Multi-scale Wavelet Responses in the x-direction from low scale to high
+  </figcaption>
+</figure>
+<h4 id="fused-edge-energy-map">Fused Edge Energy Map</h4>
+<p>The fused edge energy map obtained by integrating the multi-scale wavelet responses from both x and y directions. After computing wavelet detail responses at multiple scales, the responses are first aggregated across scales using weighted summation, where coarser scales are assigned larger weights. This strategy emphasizes large-scale structural variations while reducing the influence of fine-scale texture responses.</p>
+<p>The aggregated responses in the x and y directions are then combined using an L2-type fusion, resulting in a continuous-valued edge energy map. In this representation, higher intensity values indicate locations with stronger and more consistent intensity changes across scales and directions.</p>
+<p>This edge energy map serves as an intermediate result between the multi-scale wavelet analysis and the final binary edge maps. It provides a global view of where the algorithm detects significant intensity transitions before thresholding, and it forms the basis for the subsequent baseline edge detection and consistency-based analysis.</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="cat_experiment/plots/edge_energy.png" style="width: 50%;" />
+  </div>
+  <figcaption>
+    Fused Edge Energy Map
+  </figcaption>
+</figure>
+<h4 id="baseline-and-consistency-based-results-on-the-cat-image">Baseline and Consistency-based Results on the Cat Image</h4>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="cat_experiment/plots/overlay_baseline.png" style="width: 40%;" />
+    <img src="cat_experiment/plots/overlay_consistency.png" style="width: 40%;" />
+  </div>
+  <figcaption>
+    Baseline and Consistency-based Results on the Cat Image
+   </figcaption>
+     <figcaption>
+    Green indicates ground truth edges, red indicates detected edges, and yellow indicates correctly detected edges where the two overlap.
+   </figcaption>
+</figure>
+<p>The figure shows the edge detection results obtained by the baseline method and the consistency-based method on the initial test image, which is an image of a cat. Both methods are evaluated using pixel-level precision, recall, and F1-score with a tolerance of two pixels.</p>
+<p>For the baseline method, a large number of edge pixels are detected after thresholding the fused multi-scale edge energy map. Although this results in relatively high recall, most of the detected edges correspond to fine fur textures and local intensity fluctuations rather than perceptually meaningful object boundaries. As a result, the detected edges exhibit poor alignment with the manually drawn sketch, leading to very low precision.</p>
+<p>The consistency-based method introduces a cross-scale stability constraint by retaining only those edge responses that are significant across multiple wavelet scales. This strategy suppresses a portion of texture-induced responses and slightly improves precision compared to the baseline method. However, due to the strict nature of the consistency requirement, many true boundary pixels are also removed, which leads to a noticeable reduction in recall.</p>
+<p>The quantitative evaluation results for this experiment are summarized as follows:</p>
+<p>Baseline: Precision = 0.0858, Recall = 0.4877, F1 = 0.1460</p>
+<p>Consistency-based: Precision = 0.0910, Recall = 0.3829, F1 = 0.1471</p>
+<p>Overall, both methods achieve similarly low F1-scores on the cat image, indicating limited effectiveness under this experimental setting. These results suggest that images dominated by dense fine-scale textures, such as animal fur, pose a significant challenge for the proposed wavelet-based edge detection approach. In such cases, intensity-based edge responses are largely governed by texture patterns rather than clear structural boundaries, making it difficult to extract perceptually important contours using fixed parameters.</p>
+<p>In addition, the test image features a Siamese cat, whose coat exhibits a distinctive high-contrast black–white gradient. This strong internal intensity variation further complicates boundary localization, as it produces prominent responses within the object region itself. Consequently, both the baseline and consistency-based methods struggle to distinguish true object contours from internal texture and shading variations.</p>
+<p>These observations motivate the second part of the experiments, in which a different test image and refined experimental settings are adopted to more effectively evaluate the proposed methods.</p>
+<h3 id="part-2-lena-image-experiment">Part 2 Lena Image EXPERIMENT</h3>
+<h4 id="input">Input</h4>
+<p>Due to the unsatisfactory performance of the proposed method on the cat image, a new test image was selected for further experiments. Specifically, the well-known Lena image, which is widely used as a benchmark in the computer vision community, was chosen as the input image.</p>
+<p>The figure shows the input data used in this experiment, including the original RGB image, the corresponding grayscale image, and manually drawn sketch images. The grayscale image is used as the input for the wavelet-based edge detection pipeline, while the sketches serve as ground truth for quantitative evaluation.</p>
+<p>In addition, multiple hand-drawn sketches with different styles were created for the same Lena image. These sketches differ in terms of the level of detail and the emphasis on perceptually important boundaries. By using sketches with different styles, this experiment aims to investigate how variations in ground truth representation influence the evaluation results and to assess the robustness of the proposed method under different annotation conditions.</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="lena_experiment/picture/lena_original.png" style="width: 40%;" />
+    <img src="lena_experiment/picture/lena_original_gray.png" style="width: 40%;" />
+  </div>
+    <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="lena_experiment/picture/lena_sketch.jpg" style="width: 40%;" />
+    <img src="lena_experiment/picture/lena_sketch_2.jpg" style="width: 40%;" />
+  </div>
+  <figcaption>
+    Lena Image Origin, Grayscale, Sketch1,Sketch2
+  </figcaption>
+</figure>
+<h4 id="output">output</h4>
+<p>First, for sketch styles 1 and 2, the pipeline was executed using exactly the same parameter settings as those used in the cat experiment.</p>
+<p>For sketch 1, the baseline method achieved an F1 score of 0.6702, with relatively high recall, indicating that most annotated boundaries were successfully detected. The consistency-based method improved precision but significantly reduced recall, leading to a lower F1 score of 0.5955.</p>
+<p>For sketch 2, the baseline method again achieved a balanced performance with an F1 score of 0.6786. The consistency-based method further increased precision to 0.7900, but recall dropped sharply, resulting in an overall lower F1 score of 0.5637.</p>
+<p>These results indicate that while cross-scale consistency effectively suppresses texture-induced edges, it tends to remove valid boundary pixels when the ground truth focuses on coarse contours, leading to a precision–recall trade-off.</p>
+<p>This represents changes at different scales in the x-direction.</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="lena_experiment/plots/Ex_scale_1.png" style="width: 20%;" />
+    <img src="lena_experiment/plots/Ex_scale_2.png" style="width: 20%;" />
+    <img src="lena_experiment/plots/Ex_scale_3.png" style="width: 20%;" />
+    <img src="lena_experiment/plots/Ex_scale_4.png" style="width: 20%;" />
+  </div>
+  <figcaption>
+    Different scale in X axes
+  </figcaption>
+</figure>
+<p>The two sketches correspond to different ground truths. As you can see, sketch one has thinner lines and focuses more on detail, while sketch two has relatively thicker lines and emphasizes the outline more.</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="lena_experiment/plots/gt_bin.png" style="width: 40%;" />
+    <img src="lena_experiment/plots_2/gt_bin.png" style="width: 40%;" />
+  </div>
+  <figcaption>
+    Ground truth of 2 sketches
+  </figcaption>
+</figure>
+<p>The following are the baseline and consistency of sketch 1:<figure style="text-align: center;"></p>
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="lena_experiment/plots/overlay_baseline.png" style="width: 40%;" />
+    <img src="lena_experiment/plots/overlay_consistency.png" style="width: 40%;" />
+  </div>
+  <figcaption>
+    output of sketch 1
+  </figcaption>
+       <figcaption>
+    Green indicates ground truth edges, red indicates detected edges, and yellow indicates correctly detected edges where the two overlap.
+   </figcaption>
+</figure>
+<p>From the images, the baseline method detects most major boundaries and achieves higher overall accuracy, while the consistency-based method produces cleaner edges but removes many valid boundary pixels, leading to lower recall.</p>
+<p>The following are the baseline and consistency of sketch 2:</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="lena_experiment/plots_2/overlay_baseline.png" style="width: 40%;" />
+    <img src="lena_experiment/plots_2/overlay_consistency.png" style="width: 40%;" />
+  </div>
+  <figcaption>
+    output of sketch 2
+  </figcaption>
+       <figcaption>
+    Green indicates ground truth edges, red indicates detected edges, and yellow indicates correctly detected edges where the two overlap.
+   </figcaption>
+</figure>
+<p>Compared to sketch 1, sketch 2 emphasizes coarse object contours, under which the consistency-based method aligns better with the ground truth by suppressing fine texture edges and preserving dominant structures.</p>
+<h4 id="optimization">Optimization</h4>
+<p>The initial experiments showed that using a fixed set of parameters led to unstable performance across different images and sketch styles. In particular, edge responses were often dominated by fine texture details, which reduced alignment with the manually drawn ground truth. This observation motivated a systematic parameter optimization process.</p>
+<p>The optimization was performed using a grid search strategy. Instead of manually tuning parameters, multiple combinations were exhaustively evaluated under the same experimental protocol. The search space included both wavelet-related parameters and cross-scale consistency parameters. Specifically, different wavelet families and decomposition levels were tested to examine their influence on edge localization and smoothness. In addition, parameters controlling cross-scale consistency, such as the minimum number of scales required for an edge to be considered stable and the quantile threshold for significant responses, were enumerated.</p>
+<p>For each parameter combination, the complete edge detection pipeline was executed, and performance was evaluated using pixel-level precision, recall, and F1-score with a fixed tolerance. The final configuration was selected based on the highest F1 score, ensuring a balanced trade-off between precision and recall.</p>
+<p>This optimization strategy allows objective comparison between parameter settings and avoids bias introduced by manual tuning, providing a more reliable evaluation of the proposed method.</p>
+<h4 id="optimization-output-of-sketch-1">Optimization output of sketch 1</h4>
+<p>After parameter optimization, the best performance on sketch 1 was achieved using the db2 wavelet with four decomposition levels and L2-based fusion. The optimization favored a moderate cross-scale consistency constraint, requiring edge responses to be stable across at least two scales with a quantile threshold of 0.85. Otsu thresholding was selected automatically, and no morphological opening was applied.</p>
+<p>Under this configuration, the consistency-based method achieved a precision of 0.7719, a recall of 0.6611, and an F1 score of 0.7122, representing a clear improvement over the initial results. Compared to the baseline output, the optimized consistency-based result shows better suppression of texture-induced edges while retaining most of the perceptually important contours defined in the sketch.</p>
+<p>These results indicate that jointly optimizing wavelet-related parameters and cross-scale consistency parameters is effective for improving edge detection performance when the ground truth emphasizes meaningful object boundaries rather than fine texture details.</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="lena_experiment/plots_optimization/best_run/overlay_baseline.png" style="width: 40%;" />
+    <img src="lena_experiment/plots_optimization/best_run/overlay_consistency.png" style="width: 40%;" />
+  </div>
+  <figcaption>
+    Final Results on Sketch 1 after Optimization
+  </figcaption>
+       <figcaption>
+    Green indicates ground truth edges, red indicates detected edges, and yellow indicates correctly detected edges where the two overlap.
+   </figcaption>
+</figure>
+<h4 id="optimization-output-of-sketch-2">Optimization output of sketch 2</h4>
+<p>For sketch 2, the optimal configuration was obtained using the sym4 wavelet with four decomposition levels and L2-based fusion, together with Otsu thresholding and a moderate cross-scale consistency constraint. Similar to sketch 1, the consistency condition required edge responses to be stable across at least two scales with a quantile threshold of 0.85, and no morphological opening was applied.</p>
+<p>Under this configuration, the consistency-based method achieved a precision of 0.7750, a recall of 0.5873, and an F1 score of 0.6682. Compared to the baseline result, the consistency-based output shows improved suppression of fine texture edges, but the recall reduction is more pronounced than in sketch 1. This indicates that while sketch 2 benefits from smoother wavelet bases such as sym4, the stricter consistency constraint removes a larger portion of valid boundary pixels when the ground truth focuses on simplified contours.</p>
+<p>Overall, the optimized results on sketch 2 confirm the same trade-off observed earlier: cross-scale consistency improves precision and visual cleanliness, but its effectiveness is strongly influenced by the style of the ground truth sketch.</p>
+<figure style="text-align: center;">
+  <div style="display: flex; justify-content: center; gap: 10px;">
+    <img src="lena_experiment/plots_optimization_2/best_run/overlay_baseline.png" style="width: 40%;" />
+    <img src="lena_experiment/plots_optimization_2/best_run/overlay_consistency.png" style="width: 40%;" />
+  </div>
+  <figcaption>
+    Final Results on Sketch 2 after Optimization
+  </figcaption>
+       <figcaption>
+    Green indicates ground truth edges, red indicates detected edges, and yellow indicates correctly detected edges where the two overlap.
+   </figcaption>
+</figure>
+<p>After optimization, both sketches benefited from joint tuning of wavelet-related parameters and cross-scale consistency parameters, but their optimal configurations differed. Sketch 1 achieved its best performance with the db2 wavelet, resulting in a higher F1 score, while sketch 2 favored the smoother sym4 wavelet but reached a slightly lower overall accuracy.</p>
+<p>The optimized results indicate that sketch 1, which preserves more fine structural details, allows the consistency-based method to retain valid boundary responses more effectively. In contrast, sketch 2 emphasizes coarse contours, making the method more sensitive to recall loss under the same consistency constraints. This comparison highlights that the effectiveness of cross-scale consistency depends not only on the algorithm parameters, but also on the annotation style of the ground truth.</p>
+<h4 id="discussion-on-optimization-trade-offs">Discussion on Optimization Trade-offs</h4>
+<p>During the optimization process, it was observed that improved parameter tuning does not always lead to monotonically better performance in terms of the F1 score. In particular, configurations that strengthen cross-scale consistency may result in lower recall, even when precision is improved.</p>
+<p>This behavior arises from the nature of the consistency constraint. By requiring edge responses to be stable across multiple wavelet scales, the method effectively suppresses texture-induced and noise-related edges. However, this same constraint can also remove valid boundary pixels that appear strongly at only a limited number of scales, especially when the ground truth sketch emphasizes coarse or simplified contours.</p>
+<p>As a result, parameter settings that are optimal for one sketch style or image structure may become suboptimal for another. This phenomenon reflects an inherent trade-off between precision and recall rather than a failure of the optimization procedure. The observed performance degradation under certain parameter combinations highlights the sensitivity of edge detection to annotation style and image content.</p>
+<p>Overall, these results indicate that optimization in this context should be interpreted as balancing competing objectives rather than seeking a single universally optimal configuration.</p>
+<h2 id="discussion-and-reflection">Discussion and Reflection</h2>
+<p>Through this series of experiments, it became clear that edge detection performance is strongly influenced not only by the algorithm itself, but also by the characteristics of the input image and the style of ground truth annotation. The initial failures on the cat image highlighted the limitations of intensity-based edge responses in the presence of dense textures, motivating a deeper investigation into parameter sensitivity and optimization.</p>
+<p>By introducing systematic parameter optimization and jointly tuning wavelet-related parameters and cross-scale consistency constraints, the proposed pipeline achieved more stable and interpretable results on the Lena image. However, the comparison between different sketch styles further revealed that no single configuration performs optimally across all annotation styles. In particular, enforcing cross-scale consistency improves precision and visual clarity, but may lead to reduced recall when the ground truth emphasizes simplified contours.</p>
+<p>Overall, these findings suggest that effective edge detection requires careful alignment between algorithm design, parameter selection, and evaluation criteria. Rather than pursuing a universally optimal setting, this work emphasizes the importance of understanding the interaction between image content, annotation style, and model behavior when interpreting quantitative evaluation results.</p>
+
+</body>
+</html>

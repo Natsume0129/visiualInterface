@@ -14,7 +14,7 @@ Finally, the extracted edge maps are quantitatively evaluated by comparison with
 If you need to see my code and the raw output, you can check my GitHub repository or the project archive.
 
 Github repository:
-https://github.com/Natsume0129/visiualInterface
+https://github.com/Natsume0129/visualInterface
 
 ## Overview
 The experiments in this study are divided into two main parts, each accompanied by corresponding parameter tuning and optimization.
