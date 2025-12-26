@@ -1,0 +1,20 @@
+{
+  "wavelet": "sym4",
+  "levels": 4,
+  "fusion": "l2",
+  "threshold_mode": "otsu",
+  "edge_q": null,
+  "morph_open_k": 0,
+  "consistency_k": 2,
+  "consistency_q": 0.85,
+  "baseline": {
+    "p": 0.7767869809293968,
+    "r": 0.6340821863419694,
+    "f1": 0.6982175218885402
+  },
+  "consistency": {
+    "p": 0.7749730506647329,
+    "r": 0.5872602576538761,
+    "f1": 0.6681834459558597
+  }
+}
